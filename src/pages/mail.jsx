@@ -3,7 +3,7 @@ import { Sidebar } from "../components/sidebar";
 import { Navbar } from "../components/navbar";
 import { ComposeMessage } from "./compose-message";
 import { Inbox } from "./inbox";
-import { Outbox } from "./outbox";
+import { Outbox } from "./outboxx";
 import { InboxLists } from "../components/inbox-lists";
 
 export const Mail = () => {
@@ -22,12 +22,12 @@ export const Mail = () => {
           setSidebarToggle={setSidebarToggle}
         />
       </div>
-      <div className="flex">
+      <div className="flex bg-zinc-200">
         <div className="bg-zinc-200">
           <InboxLists userPage={userPage} sidebarToggle={sidebarToggle} />
         </div>
 
-        <div className="bg-zinc-200 w-full h-[100vh]">
+        <div className=" w-full h-[80vh]">
           {userPage === "New Mail" && (
             <ComposeMessage
               sidebarToggle={sidebarToggle}
@@ -36,10 +36,7 @@ export const Mail = () => {
           )}
           {userPage === "Inbox" && <Inbox sidebarToggle={sidebarToggle} />}
           {userPage === "Outbox" && (
-            <p>
-              {" "}
-              <Outbox />{" "}
-            </p>
+              <Outbox />
           )}
           {/* {userPage === "experiences" && <p> <AdminExperiences sidebarToggle={sidebarToggle} /> </p>} */}
         </div>

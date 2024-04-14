@@ -22,14 +22,14 @@ export const ComposeMessage = ({ sidebarToggle, setsetUserPage }) => {
           </div>
 
           <div className="flex h-10 w-10 hover:bg-violet-100 focus:bg-violet-100 flex justify-center items-center rounded ">
-          <i class="fa-solid fa-trash"></i>
+          <i className="fa-solid fa-trash"></i>
           </div>
         </div>
         <hr />
 
         <div className="flex items-center py-2 px-3">
           <div className="flex gap-5">
-            <button className="py-1 px-7 border rounded bg-white hover:bg-violet-100 focus:bg-green-700  text-back">
+            <button className="py-1 px-7 border rounded bg-white hover:bg-violet-100 text-back">
               To
             </button>
 
@@ -44,8 +44,10 @@ export const ComposeMessage = ({ sidebarToggle, setsetUserPage }) => {
         </div>
         <hr />
 
-       <div className="ml-2 mt-5 w-[850px] h-auto">
-        <textarea className="w-full" rows='19' name="mesage" />
+       <div  className={`${
+          sidebarToggle ? "" : "w-[900px]"
+        } mr-2 h-auto ml-2 mt-5`} >
+        <textarea className="w-full border p-5" rows='18' name="mesage" />
        </div>
       </div>
     </div>
