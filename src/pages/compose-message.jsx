@@ -5,7 +5,7 @@ export const ComposeMessage = ({ sidebarToggle, setsetUserPage }) => {
     <div
       className={`${
         sidebarToggle ? "" : "ml-[5px]"
-      } w-89 text-center ml-[5px] mx-10 pb-10`}
+      } w-89 text-center h-[80vh] ml-[5px] mx-10 pb-10 bg-violet-100`}
     >
       <div
         className={`${

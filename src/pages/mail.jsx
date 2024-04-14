@@ -22,12 +22,12 @@ export const Mail = () => {
           setSidebarToggle={setSidebarToggle}
         />
       </div>
-      <div className="flex bg-zinc-200">
+      <div className="flex bg-zinc-200 h-[92vh]">
         <div className="bg-zinc-200">
           <InboxLists userPage={userPage} sidebarToggle={sidebarToggle} />
         </div>
 
-        <div className=" w-full h-[80vh]">
+        <div className=" w-full">
           {userPage === "New Mail" && (
             <ComposeMessage
               sidebarToggle={sidebarToggle}
