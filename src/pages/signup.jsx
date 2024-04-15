@@ -46,7 +46,7 @@ export const Signup = () => {
               required
             />
             <div className="absolute inset-y-0 end-0 flex items-center pr-3.5 pointer-events-none">
-              @example.com
+              @dmail.com
             </div>
           </div>
         </div>
