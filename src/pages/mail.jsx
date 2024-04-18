@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import { Sidebar } from "../components/sidebar";
-import { Navbar } from "../components/navbar";
-import { ComposeMessage } from "./compose-message";
-import { Inbox } from "./inbox";
-import { Outbox } from "./outboxx";
-import { InboxLists } from "../components/inbox-lists";
+import { Navigate } from "react-router-dom";
 
 export const Mail = () => {
   const [sidebarToggle, setSidebarToggle] = useState(false);
   const [userPage, setsetUserPage] = useState("");
 
+  if(true){
+    return <Navigate to={`/login`}/>
+  }
+  
   return (
+    
     <>
-      <div className="flex bg-zinc-200">
+      <div className="flex">
         <Sidebar
           sidebarToggle={sidebarToggle}
           setsetUserPage={setsetUserPage}
         />
-        <Navbar
+        {/* <Navbar
           sidebarToggle={sidebarToggle}
           setSidebarToggle={setSidebarToggle}
-        />
+        /> */}
       </div>
-      <div className="flex bg-zinc-200 h-[92vh]">
+      {/* <div className="flex bg-zinc-200">
         <div className="bg-zinc-200">
           <InboxLists userPage={userPage} sidebarToggle={sidebarToggle} />
         </div>
@@ -39,8 +40,8 @@ export const Mail = () => {
               <Outbox />
           )}
           {/* {userPage === "experiences" && <p> <AdminExperiences sidebarToggle={sidebarToggle} /> </p>} */}
-        </div>
-      </div>
+        {/* </div> */}
+      {/* // </div> */}
     </>
   );
 };

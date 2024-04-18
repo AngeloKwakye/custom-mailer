@@ -1,30 +1,71 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export const  Sidebar = ({sidebarToggle, setsetUserPage}) => {
+export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
+  const [Index, setIndex] = useState(0);
+  const [open, setOpen] = useState(true);
+  const Menus = [
+    { title: "New Mail", icon: "folder-open", link: "/composemessage" },
+    { title: "Inbox", icon: "inbox", link: "/inbox" },
+    { title: "Outbox", icon: "right-from-bracket", link: "/outbox"},
+    { title: "Trash ", icon: "trash-can", link:"/trash", gap: true },
+    { title: "Archive", icon: "box-archive", link: "/archived" },
+    { title: "settings ", icon: "gear", link: "/settings", gap: true }
+  ];
 
+  const changeIndex = (index) => {
+    console.log({ index });
+    setIndex(index);
+  };
+
+ 
   return (
-    <div className={`${sidebarToggle ? " hidden " : " block " } ease-in-out w-72 bg-zinc-200 fixed h-full px-4 py-2`}>
-      <div className="my-2 mb-4">
-        <h1 className="tetxt-2x text-black font-bold ">{`<emailaddress@example.com>`}</h1>
-      </div>
-        <hr />
-        <ul className="mt-3 text-black font-bold">
-          
-        <li className="mb-2 rounded hover:shadow hover:bg-zinc-300 focus:bg-zinc-300  py-2" onClick={()=> setsetUserPage('New Mail')}>
-            
-            <Link className=" px-2"><i className="fa-solid fa-house inline-block 1-6 h-6 mr-2 -mt-2"></i>Add New Mail</Link>
-          </li>
-
-          <li className="mb-2 rounded hover:shadow hover:bg-zinc-300 focus:bg-zinc-300  py-2" onClick={()=> setsetUserPage('Inbox')}>
-            
-            <Link className=" px-2"><i className="fa-solid fa-house inline-block 1-6 h-6 mr-2 -mt-2"></i>Inbox</Link>
-          </li>
-          <li className="mb-2 rounded hover:shadow hover:bg-zinc-300 focus:bg-zinc-300  py-2"  onClick={()=> setsetUserPage('Outbox')}>
-            
-            <Link className="px-2"><i className="fa-solid fa-book h-6 mr-2 -mt-2"></i>Outbox</Link>
-          </li>
+      <div
+        className={` ${
+          open ? "w-72" : "w-20"
+        } bg-zinc-100 h-screen p-5  pt-8 relative duration-300`}
+      >
+        <i
+          className={`fa-solid fa-greater-than text-sky-700 absolute cursor-pointer -right-3 top-9 p-2 bg-zinc-100 text-md border-cyan-700 
+           border rounded-full  ${!open && "rotate-180"}`}
+          onClick={() => setOpen(!open)}
+        ></i>
+        <div className="flex gap-x-4 items-center">
+          <i
+            className={`fa-solid fa-envelope text-cyan-700 text-xl cursor-pointer duration-500 ${open}`}
+          ></i>
+          <h1
+            className={`text-black rounded-lg  origin-left font-medium text-xl duration-200 font-serif ${
+              !open && "scale-0"
+            }`}
+          >
+            D'Mailer
+          </h1>
+        </div>
+        <ul className="pt-6">
+          {Menus.map((Menu, index) => (
+           <Link to={`${Menu.link}`}>
+               <li
+              key={index}
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-sky-300 text-black hover:text-sky-700 focus:text-white text-sm items-center gap-x-4 
+              ${Menu.gap ? "mt-7" : "mt-2"} ${
+                index === Index && "bg-sky-300"
+              } `}
+              onClick={() => changeIndex(index)}
+            >
+              <i className={`fa-solid fa-${Menu.icon}`}></i>
+              <span
+                className={`${
+                  !open && "hidden"
+                } origin-left text-black duration-200`}
+              >
+                {Menu.title}
+              </span>
+            </li>
+           </Link>
+          ))}
         </ul>
-    </div>
+      </div>
+      
   );
 };
