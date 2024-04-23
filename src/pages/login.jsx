@@ -1,12 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
+
+  const [signinData, setSigninData] = useState({
+    email: "",
+    password: "",
+  });
+  const [notification, setNotification] = useState("Welcome!")
+  const [load, setLoad] = useState(false)
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setSigninData((prevSignupData) => ({ ...prevSignupData, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/");
+
+    const userData = {
+      email: signinData.email,
+      password: signinData.password,
+    };
+    const result = await fetch(
+      `http://localhost:${process.env.PORT}/api/users/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
+    if(result.status != 201){
+      setNotification("Failed to Login, Please try again!")
+      return 
+    }
+
+    if(result.status == 201){
+      const data = await result.json();
+      console.log({data})
+    }
+    setLoad(true);
+    // navigate("/");
   };
 
   return (
@@ -30,6 +67,7 @@ export const Login = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="name@dmail.com"
             required
+            onChange={handleChange}
           />
         </div>
         <div className="mb-5">
@@ -44,6 +82,7 @@ export const Login = () => {
             id="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
+            onChange={handleChange}
           />
         </div>
         <p id="helper-text-explanation" className=" mb-2 text-sm text-gray-500 dark:text-gray-400">Don't have an account?<Link  to="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Signup here</Link>.</p>
@@ -54,6 +93,12 @@ export const Login = () => {
           Login
         </button>
       </form>
+      {load ?  <aside class="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
+
+<span class="text-xl font-medium hover:opacity-75">
+{notification}
+</span>
+</aside>: ""}
     </>
   );
 };
