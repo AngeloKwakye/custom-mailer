@@ -12,6 +12,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleChange = (event) => {
+    console.log(event.target.value)
     const { name, value } = event.target;
     setSigninData((prevSignupData) => ({ ...prevSignupData, [name]: value }));
   };
@@ -23,8 +24,9 @@ export const Login = () => {
       email: signinData.email,
       password: signinData.password,
     };
+    // console.log({userData})
     const result = await fetch(
-      `http://localhost:${process.env.PORT}/api/users/login`,
+      `http://localhost:6100/api/users/login`,
       {
         method: "POST",
         headers: {
@@ -33,14 +35,16 @@ export const Login = () => {
         body: JSON.stringify(userData),
       }
     );
-    if(result.status != 201){
+    if(!result){
       setNotification("Failed to Login, Please try again!")
       return 
     }
 
-    if(result.status == 201){
+    if(result){
       const data = await result.json();
-      console.log({data})
+      console.log({data});
+      localStorage.setItem("token", data.accessToken);
+      navigate("/composemessage");
     }
     setLoad(true);
     // navigate("/");
@@ -64,6 +68,7 @@ export const Login = () => {
           <input
             type="email"
             id="email"
+            name="email"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="name@dmail.com"
             required
@@ -80,6 +85,7 @@ export const Login = () => {
           <input
             type="password"
             id="password"
+            name="password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
             onChange={handleChange}

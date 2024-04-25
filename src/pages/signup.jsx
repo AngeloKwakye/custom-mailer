@@ -42,14 +42,15 @@ export const Signup = () => {
     );
     console.log({result})
     if(result.status !== 201){
-      setNotification("Failed to signup, Please try again!")
+      setNotification("Failed to signup, Please try again!");
       return 
     }
 
     if(result.status === 201){
       const data = await result.json();
-      console.log({data})
-      setNotification("Well Done! 👏")
+      console.log({data});
+      setNotification("Well Done! 👏");
+      navigate("/composemessage")
     }
     setLoad(true);
     // navigate("/");

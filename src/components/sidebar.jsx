@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
-  const [Index, setIndex] = useState(0);
+  const navigate = useNavigate();
+  const [Index, setIndex] = useState(null);
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "New Mail", icon: "folder-open", link: "/composemessage" },
@@ -10,13 +11,18 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
     { title: "Outbox", icon: "right-from-bracket", link: "/outbox"},
     { title: "Trash ", icon: "trash-can", link:"/trash", gap: true },
     { title: "Archive", icon: "box-archive", link: "/archived" },
-    { title: "settings ", icon: "gear", link: "/settings", gap: true }
+    { title: "Settings ", icon: "gear", link: "/settings", gap: true },
   ];
 
   const changeIndex = (index) => {
     console.log({ index });
     setIndex(index);
   };
+
+  const signOut=()=>{
+    localStorage.removeItem("token");
+    navigate("/login");
+  }
 
  
   return (
@@ -64,6 +70,12 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
             </li>
            </Link>
           ))}
+          <li onClick={()=> signOut()} className="flex rounded-md p-2 cursor-pointer hover:bg-sky-300 text-black hover:text-sky-700 focus:text-white text-sm items-center gap-x-4 mt-7 hover:bg-sky-300">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span className={`${
+                  !open && "hidden"
+                } origin-left text-black duration-200`}>Signout</span>
+          </li>
         </ul>
       </div>
       

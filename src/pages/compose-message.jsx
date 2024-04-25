@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar } from "../components/sidebar";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const ComposeMessage = () => {
+  const navigate = useNavigate();
+  const getToken =()=>{
+    const token = localStorage.getItem("token")
+    console.log(token)
+    if(!token){
+      navigate("/login");
+    }
+  }
+
+
+  useEffect(()=>{
+    getToken();
+  },[]);
+  
 
   const messageSubmit = () => {
     console.log("submitted");
@@ -61,9 +75,10 @@ export const ComposeMessage = () => {
 
             <div className="p-2">
               <textarea
-                className="w-full border p-5 placeholder-slate-400 placeholder:font-semibold placeholder:text-gray-500 sm:text-sm focus:outline-0"
-                rows="11"
+                className="w-full border p-5 placeholder-slate-400 placeholder:font-semibold bg-gray-100 placeholder:text-gray-500 sm:text-sm focus:outline-0"
+                rows="12"
                 name="mesage"
+                placeholder="Message"
               />
             </div>
             <div className="text-center sm:hidden">

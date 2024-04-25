@@ -1,8 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Sidebar } from "../components/sidebar";
 import { InboxLists } from "../components/inbox-lists";
+import { useNavigate } from "react-router-dom";
 
 export const Inbox = ({ sidebarToggle, setsetUserPage }) => {
+
+  const navigate = useNavigate();
+
+  const getToken =()=>{
+    const token = localStorage.getItem("token")
+    console.log(token)
+    if(!token){
+      navigate("/login");
+    }
+  }
+
+
+  useEffect(()=>{
+    getToken();
+  },[]);
+  
+
   return (
     <>
     <div className="flex flex-row h-screen">
