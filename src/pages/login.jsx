@@ -44,7 +44,7 @@ export const Login = () => {
       const data = await result.json();
       console.log({data});
       localStorage.setItem("token", data.accessToken);
-      navigate("/composemessage");
+      navigate("/");
     }
     setLoad(true);
     // navigate("/");

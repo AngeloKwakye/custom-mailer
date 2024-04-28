@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
   const navigate = useNavigate();
   const [Index, setIndex] = useState(null);
   const [open, setOpen] = useState(true);
+  const [userData, setUserData] = useState({});
   const Menus = [
     { title: "New Mail", icon: "folder-open", link: "/composemessage" },
     { title: "Inbox", icon: "inbox", link: "/inbox" },
@@ -21,8 +22,47 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
 
   const signOut=()=>{
     localStorage.removeItem("token");
+    localStorage.removeItem("userDetails");
     navigate("/login");
   }
+
+  const getUser =async ()=>{
+    const token = localStorage.getItem("token");
+    const userdetails = localStorage.getItem("userDetails");
+   if(!userdetails){
+    fetch(`http://localhost:6100/api/users/me`, {
+      headers: {
+        authorization: `Bearer ${token}`
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Netwrok error fetching data');
+      }
+      return response.json();
+    })
+    .then(data => {
+      localStorage.setItem("userDetails", JSON.stringify(data));
+      setUserData(data);
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('There was a problem with the fetch operation:', error);
+    });
+   }
+
+   if(userdetails){
+    const user = localStorage.getItem("userDetails");
+    const userValue = JSON.parse(user) 
+    setUserData(userValue);
+   }
+    
+    
+  }
+
+  useEffect(()=>{
+    getUser();
+  },[])
 
  
   return (
@@ -40,19 +80,30 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
           <i
             className={`fa-solid fa-envelope text-cyan-700 text-xl cursor-pointer duration-500 ${open}`}
           ></i>
+          <div>
           <h1
             className={`text-black rounded-lg  origin-left font-medium text-xl duration-200 font-serif ${
               !open && "scale-0"
             }`}
           >
-            D'Mailer
+            {`${userData.firstName} ${userData.lastName}`}
           </h1>
+
+          <h1
+            className={`text-black rounded-lg  origin-left text-sm duration-200 font-serif ${
+              !open && "scale-0"
+            }`}
+          >
+            {`${userData.email}`}
+          </h1>
+          </div>
+
         </div>
         <ul className="pt-6">
           {Menus.map((Menu, index) => (
-           <Link to={`${Menu.link}`}>
+           <Link key={index} to={`${Menu.link}`}>
                <li
-              key={index}
+              
               className={`flex  rounded-md p-2 cursor-pointer hover:bg-sky-300 text-black hover:text-sky-700 focus:text-white text-sm items-center gap-x-4 
               ${Menu.gap ? "mt-7" : "mt-2"} ${
                 index === Index && "bg-sky-300"

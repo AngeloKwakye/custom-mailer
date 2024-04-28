@@ -7,6 +7,8 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 
 export const Mail = () => {
+  const [userData, setUserData] = useState({});
+
 
   const navigate = useNavigate();
   const getToken =()=>{
@@ -17,9 +19,18 @@ export const Mail = () => {
     }
   }
 
+  const getUser =async ()=>{
+   let userdata = localStorage.getItem("userDetails")
+   if(userdata){
+    console.log(userdata)
+     setUserData(userdata);
+   }
+  }
+
 
   useEffect(()=>{
     getToken();
+    getUser();
   },[]);
   
   return (
@@ -31,8 +42,8 @@ export const Mail = () => {
         <div class="relative h-screen w-full">
     <div class="absolute inset-0 bg-cyan-800 bg-opacity-70"></div>
     <div class="absolute inset-0 flex flex-col items-center justify-center">
-        <h1 class="text-4xl text-white font-bold">Hello, World!</h1>
-        <p class="text-xl text-white mt-4">This is a sample text</p>
+        <h1 class="text-4xl text-white font-bold">Hello, {userData["userName"]}!</h1>
+        <p class="text-xl text-white mt-4">Welcome to D'Mailer😁, feel free and explore the world of mailing.</p>
     </div>
 </div>
         </div>
