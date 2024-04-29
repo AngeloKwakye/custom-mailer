@@ -81,12 +81,18 @@ export const ComposeMessage = () => {
     if (result.status === 201) {
       const data = await result.json();
       console.log({ data });
+      setLoad(true)
+     setTimeout(()=>{
       setNotification("Message Sent! 👏");
+     }, 2000)
       setMessage({
         body: "",
         to: "",
         subject: ""
       });
+      if(data){
+        setNotification("");  
+      }
     }
   };
 
@@ -139,7 +145,7 @@ export const ComposeMessage = () => {
                   type="email"
                   name="to"
                   value={message.to}
-                  placeholder="email@example.com"
+                  placeholder="address@dmail.com"
                   className="mt-1 w-full block bg-white px-3 py-4 placeholder-slate-400 placeholder:font-semibold placeholder:text-gray-500 sm:text-sm focus:outline-0"
                   onChange={handleChange}
                 />

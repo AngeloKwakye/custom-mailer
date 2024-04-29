@@ -51,8 +51,8 @@ export const Signup = () => {
       console.log({data});
       setNotification("Well Done! 👏");
       navigate("/composemessage")
+      setLoad(true);
     }
-    setLoad(true);
     // navigate("/");
   };
 

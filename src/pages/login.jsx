@@ -2,17 +2,16 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export const Login = () => {
-
   const [signinData, setSigninData] = useState({
     email: "",
     password: "",
   });
-  const [notification, setNotification] = useState("Welcome!")
-  const [load, setLoad] = useState(false)
+  const [notification, setNotification] = useState("Welcome!");
+  const [load, setLoad] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    console.log(event.target.value)
+    console.log(event.target.value);
     const { name, value } = event.target;
     setSigninData((prevSignupData) => ({ ...prevSignupData, [name]: value }));
   };
@@ -25,24 +24,21 @@ export const Login = () => {
       password: signinData.password,
     };
     // console.log({userData})
-    const result = await fetch(
-      `http://localhost:6100/api/users/login`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      }
-    );
-    if(!result){
-      setNotification("Failed to Login, Please try again!")
-      return 
+    const result = await fetch(`http://localhost:6100/api/users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
+    if (!result) {
+      setNotification("Failed to Login, Please try again!");
+      return;
     }
 
-    if(result){
+    if (result) {
       const data = await result.json();
-      console.log({data});
+      console.log({ data });
       localStorage.setItem("token", data.accessToken);
       navigate("/");
     }
@@ -91,7 +87,19 @@ export const Login = () => {
             onChange={handleChange}
           />
         </div>
-        <p id="helper-text-explanation" className=" mb-2 text-sm text-gray-500 dark:text-gray-400">Don't have an account?<Link  to="/signup" className="font-medium text-blue-600 hover:underline dark:text-blue-500">Signup here</Link>.</p>
+        <p
+          id="helper-text-explanation"
+          className=" mb-2 text-sm text-gray-500 dark:text-gray-400"
+        >
+          Don't have an account?
+          <Link
+            to="/signup"
+            className="font-medium text-blue-600 hover:underline dark:text-blue-500"
+          >
+            Signup here
+          </Link>
+          .
+        </p>
         <button
           type="submit"
           className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -99,12 +107,15 @@ export const Login = () => {
           Login
         </button>
       </form>
-      {load ?  <aside class="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
-
-<span class="text-xl font-medium hover:opacity-75">
-{notification}
-</span>
-</aside>: ""}
+      {load ? (
+        <aside class="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
+          <span class="text-xl font-medium hover:opacity-75">
+            {notification}
+          </span>
+        </aside>
+      ) : (
+        ""
+      )}
     </>
   );
 };
