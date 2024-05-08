@@ -23,7 +23,7 @@ export const ComposeMessage = () => {
 
   const getUser = async () => {
     const token = localStorage.getItem("token");
-    fetch(`http://localhost:6100/api/users/me`, {
+    fetch(`https://d-mailer-api.onrender.com/api/users/me`, {
       headers: {
         authorization: `Bearer ${token}`,
       },
