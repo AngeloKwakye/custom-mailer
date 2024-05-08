@@ -15,7 +15,6 @@ export const ComposeMessage = () => {
   const navigate = useNavigate();
   const getToken = () => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (!token) {
       navigate("/login");
     }
@@ -37,7 +36,6 @@ export const ComposeMessage = () => {
       })
       .then((data) => {
         setUserData(data);
-        console.log(data);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
@@ -61,18 +59,20 @@ export const ComposeMessage = () => {
       to: message.to,
       subject: message.subject,
       body: message.body,
-      date: new Date()
+      date: new Date(),
     };
     const token = localStorage.getItem("token");
-    const result = await fetch(`https://d-mailer-api.onrender.com/api/messages`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      },
-      body: JSON.stringify(messageDetails),
-    });
-    console.log({ result });
+    const result = await fetch(
+      `https://d-mailer-api.onrender.com/api/messages`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(messageDetails),
+      }
+    );
     if (result.status !== 201) {
       setNotification("Failed to send mail, Please try again!");
       return;
@@ -80,18 +80,17 @@ export const ComposeMessage = () => {
 
     if (result.status === 201) {
       const data = await result.json();
-      console.log({ data });
-      setLoad(true)
-     setTimeout(()=>{
-      setNotification("Message Sent! 👏");
-     }, 2000)
+      setLoad(true);
+      setTimeout(() => {
+        setNotification("Message Sent! 👏");
+      }, 2000);
       setMessage({
         body: "",
         to: "",
-        subject: ""
+        subject: "",
       });
-      if(data){
-        setNotification("");  
+      if (data) {
+        setNotification("");
       }
     }
   };

@@ -9,8 +9,8 @@ export const Signup = () => {
     username: "",
     password: "",
   });
-  const [notification, setNotification] = useState("")
-  const [load, setLoad] = useState(false)
+  const [notification, setNotification] = useState("");
+  const [load, setLoad] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -20,7 +20,7 @@ export const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const emailDomain = `${signupData.email}@dmail.com` 
+    const emailDomain = `${signupData.email}@dmail.com`;
 
     const userData = {
       firstName: signupData.firstname,
@@ -29,28 +29,24 @@ export const Signup = () => {
       email: emailDomain,
       password: signupData.password,
     };
-    console.log({userData});
     const result = await fetch(
       `https://d-mailer-api.onrender.com/api/users/register`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(userData),
       }
     );
-    console.log({result})
-    if(result.status !== 201){
+    if (result.status !== 201) {
       setNotification("Failed to signup, Please try again!");
-      return 
+      return;
     }
 
-    if(result.status === 201){
-      const data = await result.json();
-      console.log({data});
+    if (result.status === 201) {
       setNotification("Well Done! 👏");
-      navigate("/composemessage")
+      navigate("/composemessage");
       setLoad(true);
     }
     // navigate("/");
@@ -204,12 +200,15 @@ export const Signup = () => {
           Sign Up
         </button>
       </form>
-      {load ?  <aside class="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
-
-<span class="text-xl font-medium hover:opacity-75">
-{notification}
-</span>
-</aside>: ""}
+      {load ? (
+        <aside class="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
+          <span class="text-xl font-medium hover:opacity-75">
+            {notification}
+          </span>
+        </aside>
+      ) : (
+        ""
+      )}
     </>
   );
 };

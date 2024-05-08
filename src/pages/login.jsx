@@ -11,7 +11,6 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    console.log(event.target.value);
     const { name, value } = event.target;
     setSigninData((prevSignupData) => ({ ...prevSignupData, [name]: value }));
   };
@@ -23,14 +22,16 @@ export const Login = () => {
       email: signinData.email,
       password: signinData.password,
     };
-    // console.log({userData})
-    const result = await fetch(`https://d-mailer-api.onrender.com/api/users/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    const result = await fetch(
+      `https://d-mailer-api.onrender.com/api/users/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
     if (!result) {
       setNotification("Failed to Login, Please try again!");
       return;
@@ -38,12 +39,10 @@ export const Login = () => {
 
     if (result) {
       const data = await result.json();
-      console.log({ data });
       localStorage.setItem("token", data.accessToken);
       navigate("/");
     }
     setLoad(true);
-    // navigate("/");
   };
 
   return (
