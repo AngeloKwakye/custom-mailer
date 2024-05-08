@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "../components/sidebar";
 import { useNavigate } from "react-router-dom";
-import spinner from '../assets/infinite-spinner.svg'
+import spinner from "../assets/infinite-spinner.svg";
 export const Mail = () => {
   const [userData, setUserData] = useState({});
-  const [loader, setLoader] = useState(false)
+  const [loader, setLoader] = useState(false);
 
   const navigate = useNavigate();
   const getToken = () => {
-    setLoader(true)
+    setLoader(true);
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/login");
@@ -36,7 +36,8 @@ export const Mail = () => {
         })
         .catch((error) => {
           console.error("There was a problem with the fetch operation:", error);
-        }).finally(()=> setLoader(false));
+        })
+        .finally(() => setLoader(false));
     }
 
     if (userdetails) {
@@ -53,22 +54,27 @@ export const Mail = () => {
 
   return (
     <>
-      {loader ? <div className="w-full flex justify-center items-center">
-        <img src={spinner} alt="spinning image" />
-      </div> : (<div className="flex">
-        <Sidebar />
-        <div class="relative h-screen w-full">
-          <div class="absolute inset-0 bg-cyan-800 bg-opacity-70"></div>
-          <div class="absolute inset-0 flex flex-col items-center justify-center">
-            <h1 class="text-4xl text-white font-bold">
-              Hello, {userData.userName}!
-            </h1>
-            <p class="text-xl text-white mt-4">
-              Welcome to D'Mailer😁, feel free and explore the world of mailing.
-            </p>
+      {loader ? (
+        <div className="w-full flex justify-center items-center">
+          <img src={spinner} alt="spinning image" />
+        </div>
+      ) : (
+        <div className="flex">
+          <Sidebar />
+          <div class="relative h-screen w-full">
+            <div class="absolute inset-0 bg-cyan-800 bg-opacity-70"></div>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <h1 class="text-4xl text-white font-bold">
+                Hello, {userData.userName}!
+              </h1>
+              <p class="text-xl text-white mt-4">
+                Welcome to D'Mailer😁, feel free and explore the world of
+                mailing.
+              </p>
+            </div>
           </div>
         </div>
-      </div>) }
+      )}
     </>
   );
 };
