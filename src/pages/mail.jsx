@@ -15,10 +15,10 @@ export const Mail = () => {
     }
   };
   const getUser = async () => {
-    setLoader(true);
     const token = localStorage.getItem("token");
     const userdetails = localStorage.getItem("userDetails");
     if (!userdetails) {
+    setLoader(true);
       fetch(`https://d-mailer-api.onrender.com/api/users/me`, {
         headers: {
           authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export const Mail = () => {
         })
         .finally(() => setLoader(false));
     }
-
+    setLoader(false)
     if (userdetails) {
       const user = localStorage.getItem("userDetails");
       const userValue = JSON.parse(user);
@@ -55,7 +55,7 @@ export const Mail = () => {
   return (
     <>
       {loader ? (
-        <div className="w-full flex justify-center items-center">
+        <div className="w-40 flex justify-center items-center">
           <img src={spinner} alt="spinning image" />
         </div>
       ) : (

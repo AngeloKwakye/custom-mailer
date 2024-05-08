@@ -81,17 +81,15 @@ export const ComposeMessage = () => {
     if (result.status === 201) {
       const data = await result.json();
       setLoad(true);
+      setNotification("Message Sent! 👏");
       setTimeout(() => {
-        setNotification("Message Sent! 👏");
+        setLoad(false);
       }, 2000);
       setMessage({
         body: "",
         to: "",
         subject: "",
       });
-      if (data) {
-        setNotification("");
-      }
     }
   };
 

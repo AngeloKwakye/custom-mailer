@@ -6,6 +6,8 @@ import { Profile } from "./pages/profile";
 import { ComposeMessage } from "./pages/compose-message";
 import { Inbox } from "./pages/inbox";
 import { Outbox } from "./pages/outboxx";
+import { Trash } from "./pages/trash";
+import { Archived } from "./pages/archive";
 
 const router = createBrowserRouter([
   { path: "/", element: <Mail /> },
@@ -15,6 +17,8 @@ const router = createBrowserRouter([
   { path: "/inbox", element: <Inbox /> },
   { path: "/outbox", element: <Outbox /> },
   { path: "/settings", element: <Profile /> },
+  { path: "/trash", element: <Trash /> },
+  { path: "/archived", element: <Archived /> },
 ]);
 
 function App() {

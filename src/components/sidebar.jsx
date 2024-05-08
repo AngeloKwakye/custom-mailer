@@ -118,7 +118,7 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
           onClick={() => signOut()}
           className="flex rounded-md p-2 cursor-pointer hover:bg-sky-300 text-black hover:text-sky-700 focus:text-white text-sm items-center gap-x-4 mt-7 hover:bg-sky-300"
         >
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <i className="fa-solid fa-arrow-right-from-bracket"></i>
           <span
             className={`${
               !open && "hidden"

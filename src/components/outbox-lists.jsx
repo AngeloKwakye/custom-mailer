@@ -18,7 +18,8 @@ export const OutboxLists = ({ outbox }) => {
       return;
     }
     const user = JSON.parse(userData);
-    const filteredMessages = lists.filter((message) => {
+    const reversed = lists.reverse();
+    const filteredMessages = reversed.filter((message) => {
       return message.from == user.email;
     });
     setMessages(filteredMessages);
@@ -111,10 +112,10 @@ export const OutboxLists = ({ outbox }) => {
           )}
           {selectedMessage && (
             <div className="flex flex-col gap-4">
-              <h2 className="text-center w-full py-2 shadow">
+              <h2 className="text-center w-full py-2 shadow bg-white">
                 {selectedMessage.subject}
               </h2>
-              <div className="w-full flex flex-col justify-between  p-2 shadow w-[60vw] h-[70vh]">
+              <div className="w-full flex flex-col justify-between  p-2 shadow w-[60vw] h-[70vh] bg-white">
                 <div className="flex flex-col gap-10">
                   <div className="flex justify-between">
                     <div>

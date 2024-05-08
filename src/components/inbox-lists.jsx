@@ -19,7 +19,8 @@ export const InboxLists = ({ inbox }) => {
       return;
     }
     const user = JSON.parse(userData);
-    const filteredMessages = lists.filter((message) => {
+    const reversed = lists.reverse();
+    const filteredMessages = reversed.filter((message) => {
       return message.to == user.email;
     });
 
@@ -69,7 +70,9 @@ export const InboxLists = ({ inbox }) => {
         <div className="w-full text-center mt-4 font-bold text-lg">Inbox</div>
         <div className="mt-5 flex gap-4">
           <ul class="bg-white rounded-lg divide-y w-[200px] divide-gray-200 p-1">
-            {messages.length != 0 ? (
+            {messages.length === 0 ? (
+              <div className="text-center">No Messages</div>
+            ): (
               messages.map((message, index) => {
                 return (
                   <li
@@ -90,9 +93,7 @@ export const InboxLists = ({ inbox }) => {
                   </li>
                 );
               })
-            ) : (
-              <div className="text-center">No Messages</div>
-            )}
+            ) }
           </ul>
           {selectedMessage == null ? (
             <>
@@ -106,15 +107,13 @@ export const InboxLists = ({ inbox }) => {
                 </span>
               </div>
             </>
-          ) : (
-            <div className="">No Messages available</div>
-          )}
+          ) : ""}
           {selectedMessage && (
             <div className="flex flex-col gap-4">
-              <h2 className="text-center w-full py-2 shadow">
+              <h2 className="text-center w-full py-2 shadow bg-white">
                 {selectedMessage.subject}
               </h2>
-              <div className="w-full flex flex-col justify-between  p-2 shadow w-[60vw] h-[70vh]">
+              <div className="w-full flex flex-col justify-between  p-2 shadow w-[60vw] h-[70vh] bg-white">
                 <div className="flex flex-col gap-10">
                   <div className="flex justify-between">
                     <div>
