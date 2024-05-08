@@ -116,7 +116,7 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
         ))}
         <li
           onClick={() => signOut()}
-          className="flex rounded-md p-2 cursor-pointer hover:bg-sky-300 text-black hover:text-sky-700 focus:text-white text-sm items-center gap-x-4 mt-7 hover:bg-sky-300"
+          className="flex rounded-md p-2 cursor-pointer text-black hover:text-sky-700 focus:text-white text-sm items-center gap-x-4 mt-7 hover:bg-sky-300"
         >
           <i className="fa-solid fa-arrow-right-from-bracket"></i>
           <span
