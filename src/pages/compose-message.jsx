@@ -121,8 +121,8 @@ export const ComposeMessage = () => {
 
                 <div className="flex h-10 w-10 hover:bg-violet-100 focus:bg-violet-100 justify-center items-center rounded hidden sm:block">
                   {load ? (
-                    <aside class="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
-                      <span class="text-xl font-medium hover:opacity-75">
+                    <aside className="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
+                      <span className="text-xl font-medium hover:opacity-75">
                         {notification}
                       </span>
                     </aside>

@@ -106,7 +106,7 @@ export const Profile = () => {
                 disabled
                 className="px-8 items-center justify-end py-2 shadow flex gap-2 hover:bg-sky-600 bg-cyan-500 rounded"
               >
-                <i class="fa-regular fa-pen-to-square"></i>
+                <i className="fa-regular fa-pen-to-square"></i>
                 <span>Edit</span>
               </button>
             </div>

@@ -32,7 +32,6 @@ export const Login = () => {
         body: JSON.stringify(userData),
       }
     );
-    console.log({result})
     if (result.status === 401) {
       setLoad(true);
       setNotification("Emal or password Incorrect, Please try again!");
@@ -112,8 +111,8 @@ export const Login = () => {
       </form>
       )
       {load ? (
-        <aside class="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
-          <span class="text-xl font-medium hover:opacity-75">
+        <aside className="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
+          <span className="text-xl font-medium hover:opacity-75">
             {notification}
           </span>
         </aside>

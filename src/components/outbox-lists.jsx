@@ -68,7 +68,7 @@ export const OutboxLists = ({ outbox }) => {
       <div className="flex-1">
         <div className="w-full text-center mt-4 font-bold text-lg">Outbox</div>
         <div className="mt-5 flex gap-4">
-          <ul class="bg-white rounded-lg divide-y w-[200px] divide-gray-200 p-1">
+          <ul className="bg-white rounded-lg divide-y w-[200px] divide-gray-200 p-1">
             {messages.length != 0 ? (
               messages.map((message, index) => {
                 return (
@@ -101,7 +101,7 @@ export const OutboxLists = ({ outbox }) => {
                 <span className="text-bold text-base text-black-500 font-bold">
                   Select an item to read
                 </span>
-                <i class="fa-regular fa-message text-[80px] text-cyan-800"></i>
+                <i className="fa-regular fa-message text-[80px] text-cyan-800"></i>
                 <span className="text-base text-cyan-700">
                   Nothing selected
                 </span>
@@ -123,20 +123,20 @@ export const OutboxLists = ({ outbox }) => {
                       <p>To: {selectedMessage.to}</p>
                     </div>
                     <div className="flex gap-5">
-                      <i class="fa-solid fa-tent-arrow-turn-left text-blue-500 text-lg"></i>
-                      <i class="fa-solid fa-share text-red-500 text-lg"></i>
-                      <i class="fa-solid fa-trash-can text-lg"></i>
+                      <i className="fa-solid fa-tent-arrow-turn-left text-blue-500 text-lg"></i>
+                      <i className="fa-solid fa-share text-red-500 text-lg"></i>
+                      <i className="fa-solid fa-trash-can text-lg"></i>
                     </div>
                   </div>
                   <p>{selectedMessage.body}</p>
                 </div>
                 <div className="flex gap-4">
                   <button className="px-8 items-center justify-end py-2 shadow flex gap-2 hover:bg-gray-200">
-                    <i class="fa-solid fa-tent-arrow-turn-left text-blue-500"></i>
+                    <i className="fa-solid fa-tent-arrow-turn-left text-blue-500"></i>
                     <span>Reply</span>
                   </button>
                   <button className="px-8 items-center justify-end py-2 shadow flex gap-2 hover:bg-gray-200">
-                    <i class="fa-solid fa-share text-red-500"></i>
+                    <i className="fa-solid fa-share text-red-500"></i>
                     <span>Foward</span>
                   </button>
                 </div>
