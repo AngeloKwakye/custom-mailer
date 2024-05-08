@@ -24,7 +24,7 @@ export const Login = () => {
       password: signinData.password,
     };
     // console.log({userData})
-    const result = await fetch(`http://localhost:6100/api/users/login`, {
+    const result = await fetch(`https://d-mailer-api.onrender.com/api/users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -31,7 +31,7 @@ export const Signup = () => {
     };
     console.log({userData});
     const result = await fetch(
-      `http://localhost:6100/api/users/register`,
+      `https://d-mailer-api.onrender.com/api/users/register`,
       {
         method: "POST",
         headers: {

@@ -49,7 +49,6 @@ export const InboxLists = ({ inbox }) => {
     // Generate unique random colors
     while (colorSet.size < array.length) {
       const newColor = randomColor();
-      // Ensure generated color is not black and is unique
       if (newColor !== "#000000" && !colorSet.has(newColor)) {
         colorSet.add(newColor);
       }

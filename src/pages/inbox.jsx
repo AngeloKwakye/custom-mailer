@@ -18,7 +18,7 @@ export const Inbox = () => {
 
   const getAllMessages = async () => {
     const token = localStorage.getItem("token");
-    const results = fetch("http://localhost:6100/api/messages", {
+    const results = fetch("https://d-mailer-api.onrender.com/api/messages", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sidebar } from "../components/sidebar";
 
 export const Profile = () => {
   const navigate = useNavigate();
   const userData = localStorage.getItem("userDetails");
-  const [userDetails, setUserDetails] = useState([]);
 
   const getToken = () => {
     const token = localStorage.getItem("token");
@@ -53,13 +52,13 @@ export const Profile = () => {
                         <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                           Date Of Birth
                         </dt>
-                        <dd className="text-lg font-semibold">21/02/1997</dd>
+                        <dd className="text-lg font-semibold"></dd>
                       </div>
                       <div className="flex flex-col py-3">
                         <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                           Gender
                         </dt>
-                        <dd className="text-lg font-semibold">Female</dd>
+                        <dd className="text-lg font-semibold"></dd>
                       </div>
                     </dl>
                   </div>
@@ -79,7 +78,7 @@ export const Profile = () => {
                           Location
                         </dt>
                         <dd className="text-lg font-semibold">
-                          Ghana, Kofofidua
+                          
                         </dd>
                       </div>
 
@@ -87,7 +86,7 @@ export const Profile = () => {
                         <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
                           Phone Number
                         </dt>
-                        <dd className="text-lg font-semibold">+251913****30</dd>
+                        <dd className="text-lg font-semibold"></dd>
                       </div>
                       <div className="flex flex-col pt-3">
                         <dt className="mb-1 text-gray-500 md:text-lg dark:text-gray-400">
@@ -106,7 +105,7 @@ export const Profile = () => {
                   </div>
                 </div>
               </div>
-              <button className="px-8 items-center justify-end py-2 shadow flex gap-2 hover:bg-sky-600 bg-cyan-500 rounded">
+              <button disabled className="px-8 items-center justify-end py-2 shadow flex gap-2 hover:bg-sky-600 bg-cyan-500 rounded">
               <i class="fa-regular fa-pen-to-square"></i>
                     <span>Edit</span>
                   </button>

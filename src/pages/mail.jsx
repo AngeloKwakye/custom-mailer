@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Sidebar } from "../components/sidebar";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -22,7 +22,7 @@ export const Mail = () => {
     const token = localStorage.getItem("token");
     const userdetails = localStorage.getItem("userDetails");
    if(!userdetails){
-    fetch(`http://localhost:6100/api/users/me`, {
+    fetch(`https://d-mailer-api.onrender.com/api/users/me`, {
       headers: {
         authorization: `Bearer ${token}`
       }

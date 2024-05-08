@@ -64,7 +64,7 @@ export const ComposeMessage = () => {
       date: new Date()
     };
     const token = localStorage.getItem("token");
-    const result = await fetch(`http://localhost:6100/api/messages`, {
+    const result = await fetch(`https://d-mailer-api.onrender.com/api/messages`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

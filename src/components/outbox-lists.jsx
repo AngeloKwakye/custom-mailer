@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 export const OutboxLists = ({ outbox }) => {
     const [messages, setMessages] = useState([]);
@@ -132,8 +131,6 @@ export const OutboxLists = ({ outbox }) => {
       )}
           </div>
         </div>
-
-
       </>
     );
 };

@@ -30,7 +30,7 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
     const token = localStorage.getItem("token");
     const userdetails = localStorage.getItem("userDetails");
    if(!userdetails){
-    fetch(`http://localhost:6100/api/users/me`, {
+    fetch(`https://d-mailer-api.onrender.com/api/users/me`, {
       headers: {
         authorization: `Bearer ${token}`
       }
