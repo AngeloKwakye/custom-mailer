@@ -6,7 +6,6 @@ import { Profile } from "./pages/profile";
 import { ComposeMessage } from "./pages/compose-message";
 import { Inbox } from "./pages/inbox";
 import { Outbox } from "./pages/outboxx";
-import { MessageDetails } from "./pages/message-details";
 
 const router = createBrowserRouter([
   { path: "/", element: <Mail /> },
@@ -16,7 +15,6 @@ const router = createBrowserRouter([
   { path: "/inbox", element: <Inbox /> },
   { path: "/outbox", element: <Outbox /> },
   { path: "/settings", element: <Profile /> },
-  { path: "/message/:name", element: <MessageDetails /> },
 ]);
 
 function App() {
