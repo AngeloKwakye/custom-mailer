@@ -5,6 +5,7 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
   const navigate = useNavigate();
   const [Index, setIndex] = useState(null);
   const [open, setOpen] = useState(true);
+  const [infoload, setInfoLoad] = useState(false);
   const [userData, setUserData] = useState({});
   const Menus = [
     { title: "New Mail", icon: "folder-open", link: "/composemessage" },
@@ -29,6 +30,7 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
     const token = localStorage.getItem("token");
     const userdetails = localStorage.getItem("userDetails");
     if (!userdetails) {
+      setInfoLoad(true);
       fetch(`https://d-mailer-api.onrender.com/api/users/me`, {
         headers: {
           authorization: `Bearer ${token}`,
@@ -43,8 +45,10 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
         .then((data) => {
           localStorage.setItem("userDetails", JSON.stringify(data));
           setUserData(data);
+          setInfoLoad(false);
         })
         .catch((error) => {
+          setInfoLoad(false);
           console.error("There was a problem with the fetch operation:", error);
         });
     }
@@ -75,23 +79,31 @@ export const Sidebar = ({ sidebarToggle, setsetUserPage }) => {
         <i
           className={`fa-solid fa-envelope text-cyan-700 text-xl cursor-pointer duration-500 ${open}`}
         ></i>
-        <div>
-          <h1
-            className={`text-black rounded-lg  origin-left font-medium text-xl duration-200 font-serif ${
-              !open && "scale-0"
-            }`}
-          >
-            {`${userData.firstName} ${userData.lastName}`}
-          </h1>
+        {infoload ? (
+          <span className="text-center text-base animate-spin">
+            {"<-||->"}
+          </span>
+        ) : userData ? (
+          <div>
+            <h1
+              className={`text-black rounded-lg  origin-left font-medium text-xl duration-200 font-serif ${
+                !open && "scale-0"
+              }`}
+            >
+              {`${userData.firstName} ${userData.lastName}`}
+            </h1>
 
-          <h1
-            className={`text-black rounded-lg  origin-left text-sm duration-200 font-serif ${
-              !open && "scale-0"
-            }`}
-          >
-            {`${userData.email}`}
-          </h1>
-        </div>
+            <h1
+              className={`text-black rounded-lg  origin-left text-sm duration-200 font-serif ${
+                !open && "scale-0"
+              }`}
+            >
+              {`${userData.email}`}
+            </h1>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       <ul className="pt-6">
         {Menus.map((Menu, index) => (

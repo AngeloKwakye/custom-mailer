@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import spinner from "../assets/infinite-spinner.svg";
 
 export const Signup = () => {
   const [signupData, setSignupData] = useState({
@@ -11,6 +12,7 @@ export const Signup = () => {
   });
   const [notification, setNotification] = useState("");
   const [load, setLoad] = useState(false);
+  const [done, setDone] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -29,6 +31,7 @@ export const Signup = () => {
       email: emailDomain,
       password: signupData.password,
     };
+    setLoad(true);
     const result = await fetch(
       `https://d-mailer-api.onrender.com/api/users/register`,
       {
@@ -40,14 +43,17 @@ export const Signup = () => {
       }
     );
     if (result.status !== 201) {
+      setLoad(false);
+      setDone(true);
       setNotification("Failed to signup, Please try again!");
       return;
     }
 
     if (result.status === 201) {
-      setNotification("Well Done! 👏");
-      navigate("/composemessage");
-      setLoad(true);
+      setLoad(false);
+      setDone(true);
+      setNotification("SignUp Successfull 👏");
+      navigate("/");
     }
     // navigate("/");
   };
@@ -201,6 +207,11 @@ export const Signup = () => {
         </button>
       </form>
       {load ? (
+        <div className="flex w-full justify-center items-center text-center">
+          <img src={spinner} alt="loading spinner" className="w-20" />
+          <span className="text-base font-syne">Loading please wait..</span>
+        </div>
+      ) : done === true ? (
         <aside className="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
           <span className="text-xl font-medium hover:opacity-75">
             {notification}

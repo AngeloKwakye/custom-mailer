@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import spinner from "../assets/infinite-spinner.svg";
 
 export const Login = () => {
   const [signinData, setSigninData] = useState({
@@ -8,6 +9,7 @@ export const Login = () => {
   });
   const [notification, setNotification] = useState("Welcome!");
   const [load, setLoad] = useState(false);
+  const [done, setDone] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -22,6 +24,7 @@ export const Login = () => {
       email: signinData.email,
       password: signinData.password,
     };
+    setLoad(true);
     const result = await fetch(
       `https://d-mailer-api.onrender.com/api/users/login`,
       {
@@ -33,24 +36,25 @@ export const Login = () => {
       }
     );
     if (result.status === 401) {
-      setLoad(true);
+      setDone(true);
       setNotification("Emal or password Incorrect, Please try again!");
-      setTimeout(()=>{
+      setTimeout(() => {
         setLoad(false);
-      }, 2000)
+      }, 2000);
     }
     if (result.status === 200) {
-    setLoad(true);
+      setLoad(false);
+      setDone(true);
       const data = await result.json();
       localStorage.setItem("token", data.accessToken);
-      navigate("/");
+      navigate("/inbox");
     }
   };
 
   return (
     <>
-       (
-        <form className="mt-40 max-w-sm mx-auto" onSubmit={handleSubmit}>
+      (
+      <form className="mt-40 max-w-sm mx-auto" onSubmit={handleSubmit}>
         <div className="mb-10 text-center">
           <span className="text-xl font-bold">
             D'Mailer <i className="fa-solid fa-inbox ml-1"></i>
@@ -111,12 +115,19 @@ export const Login = () => {
       </form>
       )
       {load ? (
+        <div className="flex w-full justify-center items-center text-center">
+          <img src={spinner} alt="loading spinner" className="w-20" />
+          <span className="text-base font-syne">Loading please wait..</span>
+        </div>
+      ) : done === true ? (
         <aside className="fixed z-50 flex items-center justify-center px-5 py-3 text-white bg-black rounded-lg bottom-4 right-4">
           <span className="text-xl font-medium hover:opacity-75">
             {notification}
           </span>
         </aside>
-      ) :""}
+      ) : (
+        ""
+      )}
     </>
   );
 };

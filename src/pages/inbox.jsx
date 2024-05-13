@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Sidebar } from "../components/sidebar";
 import { InboxLists } from "../components/inbox-lists";
 import { useNavigate } from "react-router-dom";
-
+import spinner from "../assets/infinite-spinner.svg";
 export const Inbox = () => {
   const [inbox, setInbox] = useState([]);
   const [inboxLoad, setInboxLoading] = useState(false);
@@ -18,6 +18,8 @@ export const Inbox = () => {
 
   const getAllMessages = async () => {
     const token = localStorage.getItem("token");
+    setInboxLoading(true);
+
     const results = fetch("https://d-mailer-api.onrender.com/api/messages", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -29,7 +31,7 @@ export const Inbox = () => {
       .then((data) => {
         if (data) {
           setInbox(data);
-          setInboxLoading(true);
+          setInboxLoading(false);
         }
       })
       .catch((error) => {
@@ -53,6 +55,11 @@ export const Inbox = () => {
           <Sidebar />
         </div>
         {inboxLoad ? (
+          <div className="flex flex-col w-full justify-center items-center text-center">
+            <img src={spinner} alt="loading spinner" className="w-48" />
+            <span className="text-base font-syne">Loading please wait..</span>
+          </div>
+        ) : inbox.length > 0 ? (
           <div className="w-full bg-gray-50 max-h-screen overflow-y-auto">
             <InboxLists inbox={inbox} />
           </div>

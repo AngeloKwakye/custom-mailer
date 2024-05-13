@@ -18,7 +18,7 @@ export const Mail = () => {
     const token = localStorage.getItem("token");
     const userdetails = localStorage.getItem("userDetails");
     if (!userdetails) {
-    setLoader(true);
+      setLoader(true);
       fetch(`https://d-mailer-api.onrender.com/api/users/me`, {
         headers: {
           authorization: `Bearer ${token}`,
@@ -39,7 +39,7 @@ export const Mail = () => {
         })
         .finally(() => setLoader(false));
     }
-    setLoader(false)
+    setLoader(false);
     if (userdetails) {
       const user = localStorage.getItem("userDetails");
       const userValue = JSON.parse(user);
@@ -65,7 +65,8 @@ export const Mail = () => {
             <div className="absolute inset-0 bg-cyan-800 bg-opacity-70"></div>
             <div className="absolute inset-0 flex flex-col items-center justify-center">
               <h1 className="text-4xl text-white font-bold">
-                Hello, {userData.userName}!
+                Hello,{" "}
+                <span className="animate-pulse"> {userData.userName}</span>!
               </h1>
               <p className="text-xl text-white mt-4">
                 Welcome to D'Mailer😁, feel free and explore the world of

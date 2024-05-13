@@ -72,7 +72,7 @@ export const InboxLists = ({ inbox }) => {
           <ul className="bg-white rounded-lg divide-y w-[200px] divide-gray-200 p-1">
             {messages.length === 0 ? (
               <div className="text-center">No Messages</div>
-            ): (
+            ) : (
               messages.map((message, index) => {
                 return (
                   <li
@@ -93,7 +93,7 @@ export const InboxLists = ({ inbox }) => {
                   </li>
                 );
               })
-            ) }
+            )}
           </ul>
           {selectedMessage == null ? (
             <>
@@ -107,18 +107,27 @@ export const InboxLists = ({ inbox }) => {
                 </span>
               </div>
             </>
-          ) : ""}
+          ) : (
+            ""
+          )}
           {selectedMessage && (
             <div className="flex flex-col gap-4">
               <h2 className="text-center w-full py-2 shadow bg-white">
                 {selectedMessage.subject}
               </h2>
-              <div className="w-full flex flex-col justify-between  p-2 shadow w-[60vw] h-[70vh] bg-white">
+              <div className="w-full flex flex-col justify-between  p-2 shadow h-[70vh] bg-white">
                 <div className="flex flex-col gap-10">
                   <div className="flex justify-between">
-                    <div>
+                    <div className="flex flex-col gap-2">
                       <span>{`${userDetails.firstName} ${userDetails.lastName}`}</span>
-                      <p>To: {selectedMessage.to}</p>
+                      <p>
+                        To:{" "}
+                        {selectedMessage.to ? (
+                          <span className="bg-cyan-100 px-1 rounded">Me</span>
+                        ) : (
+                          ""
+                        )}{" "}
+                      </p>
                     </div>
                     <div className="flex gap-5">
                       <i className="fa-solid fa-tent-arrow-turn-left text-blue-500 text-lg"></i>
